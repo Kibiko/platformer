@@ -13,7 +13,7 @@ import static helper.Constants.PPM;
 
 public class GameScreen implements Screen{
 
-    final Platformer game;
+    private final Platformer game;
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
     private OrthographicCamera camera;
@@ -33,7 +33,7 @@ public class GameScreen implements Screen{
 
     public void update(){
         world.step(1/60f, 6, 2);
-        cameraupdate();
+        cameraUpdate();
         game.batch.setProjectionMatrix(camera.combined);
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
@@ -41,7 +41,7 @@ public class GameScreen implements Screen{
         }
     }
 
-    private void cameraupdate(){
+    private void cameraUpdate(){
         camera.position.set(new Vector3(0,0,0));
         camera.update();
     }

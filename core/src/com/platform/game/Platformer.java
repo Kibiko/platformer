@@ -9,9 +9,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class Platformer extends Game {
 
 	public static Platformer INSTANCE;
-	SpriteBatch batch;
-	Texture img;
-	BitmapFont font;
+	public SpriteBatch batch;
+	public Texture img;
+	public BitmapFont font;
 
 	public Platformer(){
 		INSTANCE = this;

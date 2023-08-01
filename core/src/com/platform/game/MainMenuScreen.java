@@ -8,8 +8,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainMenuScreen implements Screen {
 
-    final Platformer game;
-    OrthographicCamera camera;
+    private final Platformer game;
+    private OrthographicCamera camera;
 
     public MainMenuScreen(final Platformer game){
         this.game= game;
