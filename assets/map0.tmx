@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="64" tileheight="64" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="64" tileheight="64" infinite="0" nextlayerid="3" nextobjectid="1">
  <tileset firstgid="1" source="grid_blocks.tsx"/>
+ <imagelayer id="2" name="sky">
+  <image source="watercolour-abstract-blue-ocean-white-clouds.jpg" width="1278" height="722"/>
+ </imagelayer>
  <layer id="1" name="background" width="20" height="10">
   <data encoding="base64" compression="zlib">
    eJxjYKAvEKezfdQETGh41C2UA2YiMbGAkUhMLAAAboAAUA==

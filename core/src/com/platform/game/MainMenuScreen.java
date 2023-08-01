@@ -3,11 +3,13 @@ package com.platform.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 
 public class MainMenuScreen implements Screen {
 
+    Texture titleImage;
     private final Platformer game;
     private OrthographicCamera camera;
 
@@ -15,6 +17,7 @@ public class MainMenuScreen implements Screen {
         this.game= game;
         camera = new OrthographicCamera();
         camera.setToOrtho(false,960,640);
+        titleImage = new Texture(Gdx.files.internal("title.png"));
     }
 
 
@@ -25,13 +28,13 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0,0,0.2f,1);
+        ScreenUtils.clear(0.1f,0.1f,0.1f,1);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.font.draw(game.batch, "Welcome to the Platformer Game!",450,300);
-        game.font.draw(game.batch, "Tap Anywhere To Begin!",300,200);
+        game.batch.draw(titleImage,80,350,800,200);
+        game.font.draw(game.batch, "Tap Anywhere To Begin!",400,200);
         game.batch.end();
 
         if(Gdx.input.isTouched()){

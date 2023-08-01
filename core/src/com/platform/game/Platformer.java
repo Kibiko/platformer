@@ -27,7 +27,7 @@ public class Platformer extends Game {
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(0, 0, 0.2f, 1);
+		ScreenUtils.clear(0,0,0,1);
 		super.render();
 	}
 	
