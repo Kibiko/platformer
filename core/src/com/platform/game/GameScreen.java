@@ -5,10 +5,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import helper.TileMapHelper;
+
 import static helper.Constants.PPM;
 
 public class GameScreen implements Screen{
@@ -17,6 +21,8 @@ public class GameScreen implements Screen{
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
     private OrthographicCamera camera;
+    private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
+    private TileMapHelper tileMapHelper;
 
     public GameScreen(final Platformer game){
         this.game = game;
@@ -24,6 +30,9 @@ public class GameScreen implements Screen{
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 960, 640);
+
+        this.tileMapHelper = new TileMapHelper();
+        this.orthogonalTiledMapRenderer = tileMapHelper.setupMap();
     }
 
     @Override
@@ -35,6 +44,7 @@ public class GameScreen implements Screen{
         world.step(1/60f, 6, 2);
         cameraUpdate();
         game.batch.setProjectionMatrix(camera.combined);
+        orthogonalTiledMapRenderer.setView(camera);
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
@@ -52,6 +62,8 @@ public class GameScreen implements Screen{
 
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        orthogonalTiledMapRenderer.render();
 
         game.batch.begin();
         //render objects
