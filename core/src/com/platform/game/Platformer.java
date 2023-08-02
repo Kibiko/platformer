@@ -19,10 +19,9 @@ public class Platformer extends Game {
 
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-//		img = new Texture("badlogic.jpg");
+		batch = new SpriteBatch(); //batch is to load everything as a batch
 		font = new BitmapFont();
-		this.setScreen(new MainMenuScreen(this));
+		this.setScreen(new MainMenuScreen(this)); //sets the screen to the main menu to begin with
 	}
 
 	@Override
@@ -33,7 +32,6 @@ public class Platformer extends Game {
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-//		img.dispose();
+		batch.dispose(); //disposes of the batch
 	}
 }

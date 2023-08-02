@@ -26,13 +26,13 @@ public class GameScreen implements Screen{
 
     public GameScreen(final Platformer game){
         this.game = game;
-        this.world = new World(new Vector2(0,0),false);
-        this.box2DDebugRenderer = new Box2DDebugRenderer();
+        this.world = new World(new Vector2(0,0),false); //sets the world
+        this.box2DDebugRenderer = new Box2DDebugRenderer(); //used to see how the world looks
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 960, 640);
 
-        this.tileMapHelper = new TileMapHelper();
-        this.orthogonalTiledMapRenderer = tileMapHelper.setupMap();
+        this.tileMapHelper = new TileMapHelper(this); //tiledmap class
+        this.orthogonalTiledMapRenderer = tileMapHelper.setupMap(); //sets up title map
     }
 
     @Override
@@ -40,10 +40,10 @@ public class GameScreen implements Screen{
 
     }
 
-    public void update(){
+    public void update(){ //used to update the world
         world.step(1/60f, 6, 2);
         cameraUpdate();
-        game.batch.setProjectionMatrix(camera.combined);
+        game.batch.setProjectionMatrix(camera.combined); //sets camera each time
         orthogonalTiledMapRenderer.setView(camera);
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
@@ -51,7 +51,7 @@ public class GameScreen implements Screen{
         }
     }
 
-    private void cameraUpdate(){
+    private void cameraUpdate(){ //updates camera if we wish to
         camera.position.set(new Vector3(0,0,0));
         camera.update();
     }
@@ -63,7 +63,7 @@ public class GameScreen implements Screen{
         Gdx.gl.glClearColor(0.1f,0.1f,0.1f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        orthogonalTiledMapRenderer.render();
+        orthogonalTiledMapRenderer.render(); //renders the map
 
         game.batch.begin();
         //render objects
@@ -71,7 +71,10 @@ public class GameScreen implements Screen{
         game.batch.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
 
+    }
 
+    public World getWorld() {
+        return world;
     }
 
     @Override

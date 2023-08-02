@@ -15,7 +15,7 @@ public class MainMenuScreen implements Screen {
 
     public MainMenuScreen(final Platformer game){
         this.game= game;
-        camera = new OrthographicCamera();
+        camera = new OrthographicCamera(); //orthographic camera is the same scale and not perspective
         camera.setToOrtho(false,960,640);
         titleImage = new Texture(Gdx.files.internal("title.png"));
     }
@@ -28,9 +28,9 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0.1f,0.1f,0.1f,1);
-        camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
+        ScreenUtils.clear(0.1f,0.1f,0.1f,1); //background
+        camera.update(); //update the camera
+        game.batch.setProjectionMatrix(camera.combined); //represents the combied view and projection matrix, instructs batch to use that combined matrix
 
         game.batch.begin();
         game.batch.draw(titleImage,80,350,800,200);
@@ -38,7 +38,7 @@ public class MainMenuScreen implements Screen {
         game.batch.end();
 
         if(Gdx.input.isTouched()){
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new GameScreen(game)); //set new screen if it is touched
             dispose();
         }
     }
