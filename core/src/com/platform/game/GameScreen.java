@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import helper.TileMapHelper;
+import objects.player.Player;
 
 import static helper.Constants.PPM;
 
@@ -24,9 +25,12 @@ public class GameScreen implements Screen{
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private TileMapHelper tileMapHelper;
 
+    //game objects
+    private Player player;
+
     public GameScreen(final Platformer game){
         this.game = game;
-        this.world = new World(new Vector2(0,0),false); //sets the world
+        this.world = new World(new Vector2(0,-9.81f),false); //sets the world
         this.box2DDebugRenderer = new Box2DDebugRenderer(); //used to see how the world looks
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 960, 640);
@@ -52,7 +56,10 @@ public class GameScreen implements Screen{
     }
 
     private void cameraUpdate(){ //updates camera if we wish to
-        camera.position.set(new Vector3(0,0,0));
+        Vector3 position = camera.position;
+        position.x = Math.round(player.getBody().getPosition().x * PPM *10)/10f; //more smooth camera movement
+        position.y = Math.round(player.getBody().getPosition().y * PPM *10)/10f;
+        camera.position.set(position);
         camera.update();
     }
 
@@ -75,6 +82,10 @@ public class GameScreen implements Screen{
 
     public World getWorld() {
         return world;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 
     @Override
