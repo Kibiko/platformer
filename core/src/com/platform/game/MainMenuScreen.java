@@ -2,6 +2,7 @@ package com.platform.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -12,9 +13,14 @@ public class MainMenuScreen implements Screen {
     Texture titleImage;
     private final Platformer game;
     private OrthographicCamera camera;
+    private Music introMusic;
 
     public MainMenuScreen(final Platformer game){
         this.game= game;
+
+        introMusic = Gdx.audio.newMusic(Gdx.files.internal("8bit_forest_intro.mp3"));
+        introMusic.setLooping(true);
+
         camera = new OrthographicCamera(); //orthographic camera is the same scale and not perspective
         camera.setToOrtho(false,960,640);
         titleImage = new Texture(Gdx.files.internal("title.png"));
@@ -23,7 +29,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void show() {
-
+        introMusic.play();
     }
 
     @Override
@@ -34,7 +40,7 @@ public class MainMenuScreen implements Screen {
 
         game.batch.begin();
         game.batch.draw(titleImage,80,350,800,200);
-        game.font.draw(game.batch, "Tap Anywhere To Begin!",400,200);
+        game.font.draw(game.batch, "Click Anywhere To Begin!",400,200);
         game.batch.end();
 
         if(Gdx.input.isTouched()){
@@ -65,6 +71,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        introMusic.dispose();
     }
 }

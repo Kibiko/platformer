@@ -13,6 +13,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import helper.TileMapHelper;
 import objects.player.Player;
+import com.badlogic.gdx.audio.Music;
+
 
 import static helper.Constants.PPM;
 
@@ -24,12 +26,17 @@ public class GameScreen implements Screen{
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private TileMapHelper tileMapHelper;
+    private Music backMusic;
 
     //game objects
     private Player player;
 
     public GameScreen(final Platformer game){
         this.game = game;
+
+        backMusic = Gdx.audio.newMusic(Gdx.files.internal("8bit_game_music.wav"));
+        backMusic.setLooping(true);
+
         this.world = new World(new Vector2(0,-9.81f),false); //sets the world
         this.box2DDebugRenderer = new Box2DDebugRenderer(); //used to see how the world looks
         camera = new OrthographicCamera();
@@ -41,7 +48,7 @@ public class GameScreen implements Screen{
 
     @Override
     public void show() {
-
+        backMusic.play();
     }
 
     public void update(){ //used to update the world
@@ -57,9 +64,22 @@ public class GameScreen implements Screen{
 
     private void cameraUpdate(){ //updates camera if we wish to
         Vector3 position = camera.position;
-        position.x = Math.round(player.getBody().getPosition().x * PPM *10)/10f; //more smooth camera movement
-        position.y = Math.round(player.getBody().getPosition().y * PPM *10)/10f;
+        float xPos;
+        float yPos;
+        xPos = Math.round(player.getBody().getPosition().x * PPM *10)/10f;//more smooth camera movement
+        yPos = Math.round(player.getBody().getPosition().y * PPM *10)/10f;
+        if(yPos < 160){
+            position.y = 160;
+        } else{
+            position.y = yPos;
+        }
+        if(xPos < 240){
+            position.x = 240;
+        }else {
+            position.x = xPos;
+        }
         camera.position.set(position);
+        camera.zoom = 0.5f;
         camera.update();
     }
 
@@ -110,6 +130,5 @@ public class GameScreen implements Screen{
 
     @Override
     public void dispose() {
-
     }
 }
