@@ -3,6 +3,7 @@ package helper;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -27,7 +28,6 @@ public class TileMapHelper {
 
     public TileMapHelper(GameScreen gameScreen){
         this.gameScreen = gameScreen;
-
     }
 
     public OrthogonalTiledMapRenderer setupMap(){

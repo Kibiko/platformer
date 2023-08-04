@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import static helper.Constants.screenResHeight;
+import static helper.Constants.screenResWidth;
+
 
 public class MainMenuScreen implements Screen {
 
@@ -14,6 +17,8 @@ public class MainMenuScreen implements Screen {
     private final Platformer game;
     private OrthographicCamera camera;
     private Music introMusic;
+    private int viewPortHeight;
+    private int viewPortWidth;
 
     public MainMenuScreen(final Platformer game){
         this.game= game;
@@ -22,7 +27,7 @@ public class MainMenuScreen implements Screen {
         introMusic.setLooping(true);
 
         camera = new OrthographicCamera(); //orthographic camera is the same scale and not perspective
-        camera.setToOrtho(false,960,640);
+        camera.setToOrtho(false,screenResWidth,screenResHeight);
         titleImage = new Texture(Gdx.files.internal("title.png"));
     }
 
