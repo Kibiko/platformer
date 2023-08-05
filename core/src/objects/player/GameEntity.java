@@ -8,6 +8,7 @@ public abstract class GameEntity {
     protected float x, y, velX, velY, speed;
     protected float width, height;
     protected Body body;
+    protected boolean direction;
 
     public GameEntity(float width, float height, Body body){
         this.x = body.getPosition().x;
@@ -18,6 +19,7 @@ public abstract class GameEntity {
         this.velY = 0;
         this.speed = 0;
         this.body = body;
+        this.direction = true;
     }
 
     public abstract void update();
@@ -26,6 +28,14 @@ public abstract class GameEntity {
 
     public Body getBody() {
         return body;
+    }
+
+    public void setDirection(boolean direction){
+        this.direction = direction;
+    }
+
+    public boolean getDirection(){
+        return direction;
     }
 
 
