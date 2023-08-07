@@ -3,10 +3,13 @@ package helper;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.platform.game.GameScreen;
 import objects.player.Player;
+
+import java.awt.geom.RectangularShape;
 
 public class B2dContactListener implements ContactListener {
 
@@ -18,7 +21,6 @@ public class B2dContactListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        System.out.println("Contact");
         Fixture fa = contact.getFixtureA();
         Fixture fb = contact.getFixtureB();
 //        System.out.println(fa.getBody().getType() + " has hit " + fb.getBody().getType());
@@ -29,12 +31,26 @@ public class B2dContactListener implements ContactListener {
 //            this.shootUp(fa);
 //        }
 
+//        if (fa.getBody().getType() == BodyDef.BodyType.StaticBody){
+//            this.groundedCheck(fa,fb);
+//        } else if (fb.getBody().getType() == BodyDef.BodyType.StaticBody){
+//            this.groundedCheck(fb,fa);
+//        }
+
         if(fa.getBody().getUserData() == "WATER"){
             player.setSwimming(true);
 //            System.out.println("Player is swimming");
         }else if(fb.getBody().getUserData() == "WATER"){
             player.setSwimming(true);
 //            System.out.println("Player is swimming");
+        }
+    }
+
+    private void groundedCheck(Fixture fixture, Fixture otherFixture){
+        if(fixture.getBody().getUserData() =="PLATFORM" && otherFixture.getBody().getUserData() == "PLAYER" && otherFixture.getBody().getLinearVelocity().y <= 0){
+            player.setGrounded(true);
+        } else{
+            player.setGrounded(false);
         }
     }
 
@@ -47,7 +63,6 @@ public class B2dContactListener implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-//        System.out.println("Contact");
         Fixture fa = contact.getFixtureA();
         Fixture fb = contact.getFixtureB();
         if(fa.getBody().getUserData() == "WATER"){
@@ -59,6 +74,88 @@ public class B2dContactListener implements ContactListener {
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
+        Fixture fa = contact.getFixtureA();
+        Fixture fb = contact.getFixtureB();
+        if (fa.getBody().getType() == BodyDef.BodyType.StaticBody){
+            this.oneWayDisable(contact, fa, fb);
+        } else if (fb.getBody().getType() == BodyDef.BodyType.StaticBody){
+            this.oneWayDisable(contact, fb, fa);
+        }
+
+        if (fa.getBody().getType() == BodyDef.BodyType.StaticBody){
+            this.upPlatformDisable(contact, fa, fb);
+        } else if (fb.getBody().getType() == BodyDef.BodyType.StaticBody){
+            this.upPlatformDisable(contact, fb, fa);
+        }
+    }
+
+    private void oneWayDisable(Contact contact, Fixture mainFix, Fixture otherFixture) {
+        if (mainFix.getBody().getUserData() == "PLATFORM" &&
+                otherFixture.getBody().getUserData() == "PLAYER") {
+            contact.setEnabled(true);
+        }
+    }
+
+    private float maxPlatform(Fixture mainFixture){
+        float maxPlatHeight;
+        Vector2 vec = new Vector2();
+        Transform transform = mainFixture.getBody().getTransform();
+        PolygonShape shape = (PolygonShape) mainFixture.getShape();
+        shape.getVertex(0,vec);
+        transform.mul(vec);
+        maxPlatHeight = vec.y;
+        shape.getVertex(1,vec);
+        transform.mul(vec);
+        if(vec.y > maxPlatHeight){
+            maxPlatHeight = vec.y;
+        }
+        shape.getVertex(2,vec);
+        transform.mul(vec);
+        if(vec.y > maxPlatHeight){
+            maxPlatHeight = vec.y;
+        }
+        shape.getVertex(3,vec);
+        transform.mul(vec);
+        if(vec.y > maxPlatHeight){
+            maxPlatHeight = vec.y;
+        }
+        return maxPlatHeight;
+    }
+
+    private float maxPlayerHeight(Fixture mainFixture){
+        float maxPlayerHeight;
+        Vector2 vec = new Vector2();
+        Transform transform = mainFixture.getBody().getTransform();
+        PolygonShape shape = (PolygonShape) mainFixture.getShape();
+        shape.getVertex(0,vec);
+        transform.mul(vec);
+        maxPlayerHeight = vec.y;
+        shape.getVertex(1,vec);
+        transform.mul(vec);
+        if(vec.y < maxPlayerHeight){
+            maxPlayerHeight = vec.y;
+        }
+        shape.getVertex(2,vec);
+        transform.mul(vec);
+        if(vec.y < maxPlayerHeight){
+            maxPlayerHeight = vec.y;
+        }
+        shape.getVertex(3,vec);
+        transform.mul(vec);
+        if(vec.y < maxPlayerHeight){
+            maxPlayerHeight = vec.y;
+        }
+        return maxPlayerHeight;
+    }
+
+    private void upPlatformDisable(Contact contact, Fixture mainFixture, Fixture otherFixture){
+        System.out.println(maxPlatform(mainFixture));
+        System.out.println(maxPlayerHeight(otherFixture));
+        if(mainFixture.getBody().getUserData() == "PLATFORM" &&
+                otherFixture.getBody().getUserData() == "PLAYER" &&
+                    maxPlayerHeight(otherFixture) <= maxPlatform(mainFixture)){
+            contact.setEnabled(false);
+        }
 
     }
 

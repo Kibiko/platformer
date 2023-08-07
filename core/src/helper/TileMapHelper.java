@@ -41,6 +41,8 @@ public class TileMapHelper {
                 String polygonName = mapObject.getName();
                 if(polygonName.equals("water")){
                     createWaterBody((PolygonMapObject) mapObject);
+                } else if (polygonName.equals("platform")){
+                    createPlatformBody((PolygonMapObject) mapObject);
                 } else{
                     createStaticBody((PolygonMapObject) mapObject);
                 }
@@ -57,6 +59,7 @@ public class TileMapHelper {
                             rectangle.getHeight(),
                             false,
                             gameScreen.getWorld());
+                    body.setUserData("PLAYER");
                     gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
             }
@@ -69,6 +72,16 @@ public class TileMapHelper {
         Body body = gameScreen.getWorld().createBody(bodyDef);
         Shape shape = createPolygonShape(polygonMapObject);
         body.createFixture(shape, 1000);
+        shape.dispose();
+    }
+
+    private void createPlatformBody(PolygonMapObject polygonMapObject){ //method for creating new static body
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        Body body = gameScreen.getWorld().createBody(bodyDef);
+        Shape shape = createPolygonShape(polygonMapObject);
+        body.createFixture(shape, 1000);
+        body.setUserData("PLATFORM");
         shape.dispose();
     }
 

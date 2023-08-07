@@ -12,6 +12,7 @@ public abstract class GameEntity {
     protected boolean airborne;
     protected boolean swimming;
     protected boolean inWater;
+    protected boolean isGrounded;
 
     public GameEntity(float width, float height, Body body){
         this.x = body.getPosition().x;
@@ -65,5 +66,13 @@ public abstract class GameEntity {
 
     public void setInWater(boolean inWater) {
         this.inWater = inWater;
+    }
+
+    public boolean isGrounded() {
+        return isGrounded;
+    }
+
+    public void setGrounded(boolean grounded) {
+        isGrounded = grounded;
     }
 }
