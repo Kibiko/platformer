@@ -1,5 +1,6 @@
 package com.platform.game;
 
+import animations.PlayerAnimation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import helper.AnimatorHelper;
+import helper.B2dContactListener;
 import helper.CameraHelper;
 import helper.TileMapHelper;
 import objects.player.Player;
@@ -41,7 +43,9 @@ public class GameScreen implements Screen{
     private Texture playerImage;
 
     //animation test
-    private AnimatorHelper animatorHelper;
+    private PlayerAnimation playerAnimation;
+
+    private boolean debug = false;
 
     public GameScreen(final Platformer game){
         this.game = game;
@@ -50,7 +54,9 @@ public class GameScreen implements Screen{
         backMusic.setLooping(true);
 
         this.world = new World(new Vector2(0,-15f),false); //sets the world
-        this.box2DDebugRenderer = new Box2DDebugRenderer(); //used to see how the world looks
+        if(debug) {
+            this.box2DDebugRenderer = new Box2DDebugRenderer(); //used to see how the world looks
+        }
         camera = new CameraHelper();
         camera.setToOrtho(false, screenResWidth,screenResHeight);
 
@@ -62,8 +68,9 @@ public class GameScreen implements Screen{
         this.tileMapHelper = new TileMapHelper(this); //tiledmap class
         this.orthogonalTiledMapRenderer = tileMapHelper.setupMap(); //sets up title map
 
-        animatorHelper = new AnimatorHelper();
-        animatorHelper.create();
+        playerAnimation = new PlayerAnimation();
+        playerAnimation.create();
+        world.setContactListener(new B2dContactListener(player));
     }
 
     @Override
@@ -93,7 +100,7 @@ public class GameScreen implements Screen{
         orthogonalTiledMapRenderer.render(); //renders the map
 //        sprite.setPosition(player.getBody().getPosition().x*PPM - PPM/2,player.getBody().getPosition().y*PPM - PPM/2);
 
-        animatorHelper.render(player.getBody().getPosition().x*PPM - PPM/2,
+        playerAnimation.render(player.getBody().getPosition().x*PPM - PPM/2,
                 player.getBody().getPosition().y*PPM - PPM/2,
                 camera,
                 player);
@@ -102,9 +109,9 @@ public class GameScreen implements Screen{
 //        //render objects
 //        game.batch.draw(sprite,sprite.getX(),sprite.getY());
 //        game.batch.end();
-
-        box2DDebugRenderer.render(world, camera.combined.scl(PPM));
-
+        if(debug) {
+            box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+        }
     }
 
     public World getWorld() {

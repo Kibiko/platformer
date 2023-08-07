@@ -11,9 +11,12 @@ import static helper.Constants.*;
 
 public class CameraHelper extends OrthographicCamera {
 
+        private TiledMap tiledMap;
+        private MapProperties mapProperties;
+
     public void cameraUpdate(Player player){ //updates camera if we wish to
-        TiledMap tiledMap = new TmxMapLoader().load("new_map.tmx");
-        MapProperties mapProperties = tiledMap.getProperties();
+        tiledMap = new TmxMapLoader().load("new_map.tmx");
+        mapProperties = tiledMap.getProperties();
         int mapWidth = mapProperties.get("width", Integer.class);
         int mapHeight = mapProperties.get("height", Integer.class);
         int tilePixelWidth = mapProperties.get("tilewidth", Integer.class);
@@ -50,5 +53,21 @@ public class CameraHelper extends OrthographicCamera {
         }
         this.position.set(position);
         this.update();
+    }
+
+    public TiledMap getTiledMap() {
+        return tiledMap;
+    }
+
+    public void setTiledMap(TiledMap tiledMap) {
+        this.tiledMap = tiledMap;
+    }
+
+    public MapProperties getMapProperties() {
+        return mapProperties;
+    }
+
+    public void setMapProperties(MapProperties mapProperties) {
+        this.mapProperties = mapProperties;
     }
 }

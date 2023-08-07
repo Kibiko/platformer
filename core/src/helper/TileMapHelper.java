@@ -9,12 +9,10 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.physics.box2d.*;
 import com.platform.game.GameScreen;
 import objects.player.Player;
 
@@ -40,7 +38,12 @@ public class TileMapHelper {
         for (MapObject mapObject : mapObjects){
 
             if(mapObject instanceof PolygonMapObject){
-                createStaticBody((PolygonMapObject) mapObject);
+                String polygonName = mapObject.getName();
+                if(polygonName.equals("water")){
+                    createWaterBody((PolygonMapObject) mapObject);
+                } else{
+                    createStaticBody((PolygonMapObject) mapObject);
+                }
             }
 
             if(mapObject instanceof RectangleMapObject){ //this represents our player
@@ -69,6 +72,17 @@ public class TileMapHelper {
         shape.dispose();
     }
 
+    private void createWaterBody(PolygonMapObject polygonMapObject){
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        Body body = gameScreen.getWorld().createBody(bodyDef);
+        Shape shape = createPolygonShape(polygonMapObject);
+        body.createFixture(shape, 0);
+        makeAllFixturesSensors(body);
+        body.setUserData("WATER");
+        shape.dispose();
+    }
+
     private Shape createPolygonShape(PolygonMapObject polygonMapObject) { //sets the polygon shape
         float[] vertices = polygonMapObject.getPolygon().getTransformedVertices();
         Vector2[] worldVertices = new Vector2[vertices.length /2];
@@ -81,5 +95,11 @@ public class TileMapHelper {
         PolygonShape shape = new PolygonShape();
         shape.set(worldVertices);
         return shape;
+    }
+
+    public void makeAllFixturesSensors(Body body){
+        for(Fixture fix :body.getFixtureList()){
+            fix.setSensor(true);
+        }
     }
 }

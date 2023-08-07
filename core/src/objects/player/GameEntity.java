@@ -9,6 +9,9 @@ public abstract class GameEntity {
     protected float width, height;
     protected Body body;
     protected boolean direction;
+    protected boolean airborne;
+    protected boolean swimming;
+    protected boolean inWater;
 
     public GameEntity(float width, float height, Body body){
         this.x = body.getPosition().x;
@@ -20,6 +23,8 @@ public abstract class GameEntity {
         this.speed = 0;
         this.body = body;
         this.direction = true;
+        this.airborne = false;
+        this.swimming = false;
     }
 
     public abstract void update();
@@ -38,5 +43,27 @@ public abstract class GameEntity {
         return direction;
     }
 
+    public boolean isAirborne() {
+        return airborne;
+    }
 
+    public void setAirborne(boolean airborne) {
+        this.airborne = airborne;
+    }
+
+    public boolean isSwimming() {
+        return swimming;
+    }
+
+    public void setSwimming(boolean swimming) {
+        this.swimming = swimming;
+    }
+
+    public boolean isInWater() {
+        return inWater;
+    }
+
+    public void setInWater(boolean inWater) {
+        this.inWater = inWater;
+    }
 }

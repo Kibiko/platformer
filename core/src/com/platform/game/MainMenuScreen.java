@@ -44,8 +44,8 @@ public class MainMenuScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined); //represents the combied view and projection matrix, instructs batch to use that combined matrix
 
         game.batch.begin();
-        game.batch.draw(titleImage,80,350,800,200);
-        game.font.draw(game.batch, "Click Anywhere To Begin!",400,200);
+        game.batch.draw(titleImage,screenResWidth/2 - 400,350,800,200);
+        game.font.draw(game.batch, "Click Anywhere To Begin!",screenResWidth/2 - 100,200);
         game.batch.end();
 
         if(Gdx.input.isTouched()){
