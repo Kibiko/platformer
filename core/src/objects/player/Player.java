@@ -89,6 +89,9 @@ public class Player extends GameEntity{
             }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && jumpCounter <2){ //release it to go for second jump, just pressed
+            if(airborne){
+                jumpCounter++;
+            }
             float force = body.getMass() * 7;
             body.setLinearVelocity(body.getLinearVelocity().x,0.1f); //allows double jump and doesn't clash with body hitting floor
             body.applyLinearImpulse(new Vector2(0,force), body.getPosition(), true); //apply force to y direction in vector2

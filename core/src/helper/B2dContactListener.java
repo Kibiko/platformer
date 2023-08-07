@@ -87,13 +87,48 @@ public class B2dContactListener implements ContactListener {
         } else if (fb.getBody().getType() == BodyDef.BodyType.StaticBody){
             this.upPlatformDisable(contact, fb, fa);
         }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+            if (fa.getBody().getType() == BodyDef.BodyType.StaticBody &&
+                    fa.getBody().getUserData() == "PLATFORM"){
+                    contact.setEnabled(false);
+                }
+            if (fb.getBody().getType() == BodyDef.BodyType.StaticBody &&
+                    fb.getBody().getUserData() == "PLATFORM"){
+                contact.setEnabled(false);
+            }
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if (fa.getBody().getType() == BodyDef.BodyType.StaticBody){
+                contact.setEnabled(false);
+            }
+            if (fb.getBody().getType() == BodyDef.BodyType.StaticBody){
+                contact.setEnabled(false);
+            }
+        }
     }
+
 
     private void oneWayDisable(Contact contact, Fixture mainFix, Fixture otherFixture) {
         if (mainFix.getBody().getUserData() == "PLATFORM" &&
                 otherFixture.getBody().getUserData() == "PLAYER") {
             contact.setEnabled(true);
         }
+    }
+
+    private void upPlatformDisable(Contact contact, Fixture mainFixture, Fixture otherFixture){
+        if(mainFixture.getBody().getUserData() == "PLATFORM" &&
+                otherFixture.getBody().getUserData() == "PLAYER" &&
+                    minPlayerHeight(otherFixture) <= maxPlatform(mainFixture)){
+            contact.setEnabled(false);
+        }
+
+    }
+
+    @Override
+    public void postSolve(Contact contact, ContactImpulse impulse) {
+
     }
 
     private float maxPlatform(Fixture mainFixture){
@@ -122,45 +157,29 @@ public class B2dContactListener implements ContactListener {
         return maxPlatHeight;
     }
 
-    private float maxPlayerHeight(Fixture mainFixture){
-        float maxPlayerHeight;
+    private float minPlayerHeight(Fixture mainFixture){
+        float minPlayerHeight;
         Vector2 vec = new Vector2();
         Transform transform = mainFixture.getBody().getTransform();
         PolygonShape shape = (PolygonShape) mainFixture.getShape();
         shape.getVertex(0,vec);
         transform.mul(vec);
-        maxPlayerHeight = vec.y;
+        minPlayerHeight = vec.y;
         shape.getVertex(1,vec);
         transform.mul(vec);
-        if(vec.y < maxPlayerHeight){
-            maxPlayerHeight = vec.y;
+        if(vec.y < minPlayerHeight){
+            minPlayerHeight = vec.y;
         }
         shape.getVertex(2,vec);
         transform.mul(vec);
-        if(vec.y < maxPlayerHeight){
-            maxPlayerHeight = vec.y;
+        if(vec.y < minPlayerHeight){
+            minPlayerHeight = vec.y;
         }
         shape.getVertex(3,vec);
         transform.mul(vec);
-        if(vec.y < maxPlayerHeight){
-            maxPlayerHeight = vec.y;
+        if(vec.y < minPlayerHeight){
+            minPlayerHeight = vec.y;
         }
-        return maxPlayerHeight;
-    }
-
-    private void upPlatformDisable(Contact contact, Fixture mainFixture, Fixture otherFixture){
-        System.out.println(maxPlatform(mainFixture));
-        System.out.println(maxPlayerHeight(otherFixture));
-        if(mainFixture.getBody().getUserData() == "PLATFORM" &&
-                otherFixture.getBody().getUserData() == "PLAYER" &&
-                    maxPlayerHeight(otherFixture) <= maxPlatform(mainFixture)){
-            contact.setEnabled(false);
-        }
-
-    }
-
-    @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) {
-
+        return minPlayerHeight;
     }
 }

@@ -41,7 +41,7 @@ public class TileMapHelper {
                 String polygonName = mapObject.getName();
                 if(polygonName.equals("water")){
                     createWaterBody((PolygonMapObject) mapObject);
-                } else if (polygonName.equals("platform")){
+                } else if (polygonName.equals("platform") || polygonName.equals("slope")){
                     createPlatformBody((PolygonMapObject) mapObject);
                 } else{
                     createStaticBody((PolygonMapObject) mapObject);
