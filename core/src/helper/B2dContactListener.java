@@ -98,15 +98,6 @@ public class B2dContactListener implements ContactListener {
                 contact.setEnabled(false);
             }
         }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if (fa.getBody().getType() == BodyDef.BodyType.StaticBody){
-                contact.setEnabled(false);
-            }
-            if (fb.getBody().getType() == BodyDef.BodyType.StaticBody){
-                contact.setEnabled(false);
-            }
-        }
     }
 
 

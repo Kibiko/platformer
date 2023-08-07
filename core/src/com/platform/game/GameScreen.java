@@ -45,7 +45,7 @@ public class GameScreen implements Screen{
     //animation test
     private PlayerAnimation playerAnimation;
 
-    private boolean debug = true;
+    private boolean debug = false;
 
     public GameScreen(final Platformer game){
         this.game = game;
