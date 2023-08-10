@@ -45,12 +45,13 @@ public class GameScreen implements Screen{
     //animation test
     private PlayerAnimation playerAnimation;
 
-    private boolean debug = false;
+    private boolean debug = true;
 
     public GameScreen(final Platformer game){
         this.game = game;
 
         backMusic = Gdx.audio.newMusic(Gdx.files.internal("8bit_game_music.wav"));
+        backMusic.setVolume(masterVolume);
         backMusic.setLooping(true);
 
         this.world = new World(new Vector2(0,-15f),false); //sets the world

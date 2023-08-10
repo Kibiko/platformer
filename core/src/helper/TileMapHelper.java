@@ -43,6 +43,8 @@ public class TileMapHelper {
                     createWaterBody((PolygonMapObject) mapObject);
                 } else if (polygonName.equals("platform") || polygonName.equals("slope")){
                     createPlatformBody((PolygonMapObject) mapObject);
+                } else if (polygonName.equals("ladder")) {
+                    createLadderBody((PolygonMapObject) mapObject);
                 } else{
                     createStaticBody((PolygonMapObject) mapObject);
                 }
@@ -93,6 +95,17 @@ public class TileMapHelper {
         body.createFixture(shape, 0);
         makeAllFixturesSensors(body);
         body.setUserData("WATER");
+        shape.dispose();
+    }
+
+    private void createLadderBody(PolygonMapObject polygonMapObject){
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        Body body = gameScreen.getWorld().createBody(bodyDef);
+        Shape shape = createPolygonShape(polygonMapObject);
+        body.createFixture(shape, 0);
+        makeAllFixturesSensors(body);
+        body.setUserData("LADDER");
         shape.dispose();
     }
 

@@ -13,6 +13,8 @@ public abstract class GameEntity {
     protected boolean swimming;
     protected boolean inWater;
     protected boolean isGrounded;
+    protected boolean isContactWithLadder;
+    protected boolean isClimbing;
 
     public GameEntity(float width, float height, Body body){
         this.x = body.getPosition().x;
@@ -26,6 +28,7 @@ public abstract class GameEntity {
         this.direction = true;
         this.airborne = false;
         this.swimming = false;
+        this.isClimbing = false;
     }
 
     public abstract void update();
@@ -74,5 +77,21 @@ public abstract class GameEntity {
 
     public void setGrounded(boolean grounded) {
         isGrounded = grounded;
+    }
+
+    public boolean isClimbing() {
+        return isClimbing;
+    }
+
+    public void setClimbing(boolean climbing) {
+        isClimbing = climbing;
+    }
+
+    public boolean isContactWithLadder() {
+        return isContactWithLadder;
+    }
+
+    public void setContactWithLadder(boolean contactWithLadder) {
+        isContactWithLadder = contactWithLadder;
     }
 }

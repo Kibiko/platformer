@@ -7,8 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import static helper.Constants.screenResHeight;
-import static helper.Constants.screenResWidth;
+import static helper.Constants.*;
 
 
 public class MainMenuScreen implements Screen {
@@ -24,13 +23,13 @@ public class MainMenuScreen implements Screen {
         this.game= game;
 
         introMusic = Gdx.audio.newMusic(Gdx.files.internal("8bit_forest_intro.mp3"));
+        introMusic.setVolume(masterVolume);
         introMusic.setLooping(true);
 
         camera = new OrthographicCamera(); //orthographic camera is the same scale and not perspective
         camera.setToOrtho(false,screenResWidth,screenResHeight);
         titleImage = new Texture(Gdx.files.internal("title.png"));
     }
-
 
     @Override
     public void show() {

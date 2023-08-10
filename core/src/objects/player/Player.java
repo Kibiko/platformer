@@ -27,6 +27,7 @@ public class Player extends GameEntity{
         checkPlayerOutBounds();
         checkPlayerAirborne();
         checkPlayerWater();
+        checkPlayerClimbing();
         checkUserInput();
         maxSpeed();
     }
@@ -58,8 +59,19 @@ public class Player extends GameEntity{
         }
     }
 
+    private void checkPlayerClimbing(){ //TODO: CONTACT CLIMB VS ACTUAL CLIMB
+        if(isContactWithLadder && Gdx.input.isKeyPressed(Input.Keys.W)) {
+            isClimbing = true;
+            body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 0.25f));
+            jumpCounter = 0;
+        }
+        if(isClimbing){
+            body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 0.25f));
+        }
+    }
+
     private void checkUserInput(){
-        if(!airborne) {
+        if(!airborne && !isClimbing) {
             velX = 0;
             velY = 0;
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
@@ -72,7 +84,26 @@ public class Player extends GameEntity{
             }
         }
 
-        if(airborne) {
+        if(isClimbing) {
+            velX = 0;
+            velY = 0;
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                velX = 1;
+                direction = true;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                velX = -1;
+                direction = false;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                velY = 1;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                velY = -1;
+            }
+        }
+
+        if(airborne && !isClimbing) {
             velY=0;
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
                 velX = 1;
@@ -88,7 +119,7 @@ public class Player extends GameEntity{
                 velX *= 0.97;
             }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && jumpCounter <2){ //release it to go for second jump, just pressed
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && jumpCounter <2 && !isClimbing){ //release it to go for second jump, just pressed
             if(airborne){
                 jumpCounter++;
             }
