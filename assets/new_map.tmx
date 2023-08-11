@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="86">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="94">
  <tileset firstgid="1" source="generic_platformer_tiles.tsx"/>
  <objectgroup id="3" name="objects">
   <object id="5" name="platform" x="32" y="160">
@@ -24,13 +24,13 @@
    <polygon points="0,0 64,0 64,64 0,64"/>
   </object>
   <object id="40" name="ground" x="320" y="352">
-   <polygon points="0,0 128,0 128,62.1287 0,62.1287 0,0"/>
+   <polygon points="0,0 128,0 128,47.2186 0,47.2186 0,0"/>
   </object>
   <object id="42" name="player" x="75.2334" y="352.004" width="13.1131" height="29.654"/>
   <object id="43" name="water" x="512.351" y="435.763">
    <polygon points="0,0 0,206.953 -447.813,206.953 -447.813,0"/>
   </object>
-  <object id="49" name="slope" x="0" y="-64">
+  <object id="49" name="wall" x="0" y="-64">
    <polygon points="0,0 0,640 -64,640 -64,0"/>
   </object>
   <object id="50" name="wall" x="640" y="-64">
@@ -60,8 +60,8 @@
   <object id="74" name="ground" x="64" y="448">
    <polygon points="0,0 0,32 -64,32 -64,0"/>
   </object>
-  <object id="76" name="ladder" x="384" y="64">
-   <polygon points="0,0 32,0 32,159.082 0,159.082"/>
+  <object id="76" name="ladder" x="384" y="66.5168">
+   <polygon points="0,0 32,0 32,156.565 0,156.565"/>
   </object>
   <object id="83" name="platform" x="512" y="96">
    <polygon points="0,0 64,0 64.0039,-31.4407 0.000192219,-31.4343"/>
@@ -69,13 +69,16 @@
   <object id="85" name="platform" x="96" y="96">
    <polygon points="0,0 64,0 64,32 0,32"/>
   </object>
+  <object id="86" name="platform" x="224" y="320">
+   <polygon points="0,0 64,0 64,32 0,32"/>
+  </object>
+  <object id="87" name="platform" x="416" y="64">
+   <polygon points="0,0 -32,0 -32.0078,2.50391 0,2.51172"/>
+  </object>
  </objectgroup>
- <imagelayer id="2" name="Image Layer 1">
-  <image source="map_platformer.png" width="640" height="479"/>
- </imagelayer>
  <layer id="1" name="Tile Layer 1" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYMAEm9H42kCsA8RqSGKvsehbikVsMhbzvIHYB828pThwGRMDQzkQVwBxJRBXAXEXIwNDNyOqmb1Afh8Q5yKJsQL5bEDMDsQcjAj3TMYi1w4U60DCXUDcDTIXi58oAWupbN5ZKpkDis83QPwWiN8B8XsqmbuYSuaMAtxgCTD9LoViEFBjosy8dUBzjkIxNcA7POY8JdEOAGnTH68=
+   eJxt0ulWTlEYB/BzMn6wzDeQiGaqG1CRRMYbMM9lWqZv5pQo3AAaKBm7AWPmkm4gIVRo8N3vrPddy7vUh9969tn7nOfss88/OQiCeaQwn1QWsog00skgM76WRTY5LGYJueSRz1IKKKSIqzyimBWspJRV8X6rKaMhQUlCPZIUBEc5xnFOUBUGQTU7rO9kF7u5ZG6fWk4Ff1xPZgpTORzfT2TSf2vnzVUmqKKamqgvl6mljivxHte4zg1uUp/wDY00cYvbNNNCK3e5x30e8DB+Rm085glPeTZOv7Qw5o3xW97xng46+UAXH+mmh0/08nmc/ZaEMf3GAwzyk1/8ZohhRhgldG8SE5gYjt3vrjAmnWlh7D3T1RnMZBazmcNckplHCvNZQCoLeeHZ9iDWK4NMssgmh8UsIZc88llKAYUUsYzlFPNVr74og8alrGI1ZaxhLetYzwY2sonNbGEr29gejs3PHvZG+aOcCvZzgIMcivLHSU5xmjOc5VyUPyq5EP7L90VqwliuL1NLHVe4yjWuU09DgkaauMVtmmnhDq3c5R73ecBDHtEW/U8+8Tw6f9p5mVBf8TrKH295x3s66OQDXXykm554v14+8yX6D/Txje/8oJ8BBvnJL34zxDAjjPIXv+uacw==
   </data>
  </layer>
 </map>

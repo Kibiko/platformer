@@ -4,11 +4,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import objects.player.Player;
 
-import static helper.Constants.*;
+import static components.Constants.*;
 
 public class CameraHelper extends OrthographicCamera {
 

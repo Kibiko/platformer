@@ -1,4 +1,4 @@
-package helper;
+package contactSolvers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

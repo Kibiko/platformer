@@ -1,15 +1,9 @@
-package helper;
+package contactSolvers;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.platform.game.GameScreen;
 import objects.player.Player;
-
-import java.awt.geom.RectangularShape;
 
 public class B2dContactListener implements ContactListener {
 
@@ -44,9 +38,12 @@ public class B2dContactListener implements ContactListener {
         if(fa.getBody().getUserData() == "LADDER"){
             player.setContactWithLadder(false);
             player.setClimbing(false);
+            player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x,player.getBody().getLinearVelocity().y/2f);
         }else if(fb.getBody().getUserData() == "LADDER"){
             player.setContactWithLadder(false);
             player.setClimbing(false);
+            player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x,player.getBody().getLinearVelocity().y/2f);
+
         }
     }
 

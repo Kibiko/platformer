@@ -4,28 +4,20 @@ import animations.PlayerAnimation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import helper.AnimatorHelper;
-import helper.B2dContactListener;
+import contactSolvers.B2dContactListener;
 import helper.CameraHelper;
 import helper.TileMapHelper;
 import objects.player.Player;
 import com.badlogic.gdx.audio.Music;
 
-import static helper.Constants.*;
+import static components.Constants.*;
 
 public class GameScreen implements Screen{
 
@@ -45,7 +37,7 @@ public class GameScreen implements Screen{
     //animation test
     private PlayerAnimation playerAnimation;
 
-    private boolean debug = true;
+    private boolean debug = false;
 
     public GameScreen(final Platformer game){
         this.game = game;

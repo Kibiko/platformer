@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import helper.AnimatorHelper;
 import objects.player.Player;
 
 public class PlayerAnimation extends AnimatorHelper {
@@ -57,21 +56,21 @@ public class PlayerAnimation extends AnimatorHelper {
         float frameDuration = 0.12f;
 
         //swimming
-        if(player.isInWater()) {
-            if (player.getDirection() && player.getBody().getLinearVelocity().x == 0) {
-
-            } else if (!player.getDirection() && player.getBody().getLinearVelocity().x == 0) {
-
-            } else if (player.getDirection() && player.getBody().getLinearVelocity().x > 0) {
-
-            } else if (!player.getDirection() && player.getBody().getLinearVelocity().x < 0) {
-
-            } else if (player.getDirection() && player.getBody().getLinearVelocity().y < 0) {
-
-            } else if (!player.getDirection() && player.getBody().getLinearVelocity().y < 0) {
-
-            }
-        }
+//        if(player.isInWater()) {
+//            if (player.getDirection() && player.getBody().getLinearVelocity().x == 0) {
+//
+//            } else if (!player.getDirection() && player.getBody().getLinearVelocity().x == 0) {
+//
+//            } else if (player.getDirection() && player.getBody().getLinearVelocity().x > 0) {
+//
+//            } else if (!player.getDirection() && player.getBody().getLinearVelocity().x < 0) {
+//
+//            } else if (player.getDirection() && player.getBody().getLinearVelocity().y < 0) {
+//
+//            } else if (!player.getDirection() && player.getBody().getLinearVelocity().y < 0) {
+//
+//            }
+//        }
 
         //jumping
         if(player.isAirborne()) {

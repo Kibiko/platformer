@@ -2,22 +2,25 @@ package objects.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import helper.CameraHelper;
+import helper.InputHelper;
 
-import static helper.Constants.PPM;
+import static components.Constants.PPM;
 
 public class Player extends GameEntity{
 
     private int jumpCounter;
+    private int jumpTime;
+    private float speed;
+    private InputHelper input = new InputHelper();
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
         this.speed = 4f;
         this.jumpCounter = 0;
+        this.jumpTime = 0;
     }
 
     public void update() {
@@ -59,8 +62,8 @@ public class Player extends GameEntity{
         }
     }
 
-    private void checkPlayerClimbing(){ //TODO: CONTACT CLIMB VS ACTUAL CLIMB
-        if(isContactWithLadder && Gdx.input.isKeyPressed(Input.Keys.W)) {
+    private void checkPlayerClimbing(){
+        if(isContactWithLadder && (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.S))) {
             isClimbing = true;
             body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 0.25f));
             jumpCounter = 0;
@@ -71,70 +74,10 @@ public class Player extends GameEntity{
     }
 
     private void checkUserInput(){
-        if(!airborne && !isClimbing) {
-            velX = 0;
-            velY = 0;
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                velX = 1;
-                direction = true;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                velX = -1;
-                direction = false;
-            }
-        }
-
-        if(isClimbing) {
-            velX = 0;
-            velY = 0;
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                velX = 1;
-                direction = true;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                velX = -1;
-                direction = false;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                velY = 1;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                velY = -1;
-            }
-        }
-
-        if(airborne && !isClimbing) {
-            velY=0;
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                velX = 1;
-                direction = true;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                velX = -1;
-                direction = false;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                velY = -0.1f;
-            }
-                velX *= 0.97;
-            }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && jumpCounter <2 && !isClimbing){ //release it to go for second jump, just pressed
-            if(airborne){
-                jumpCounter++;
-            }
-            float force = body.getMass() * 7;
-            body.setLinearVelocity(body.getLinearVelocity().x,0.1f); //allows double jump and doesn't clash with body hitting floor
-            body.applyLinearImpulse(new Vector2(0,force), body.getPosition(), true); //apply force to y direction in vector2
-            jumpCounter++;
-        }
-
-        if(body.getLinearVelocity().y == 0){ //if body hits the floor and has no y velocity, currently triggers when hitting block above
-            airborne = false;
-            jumpCounter = 0;
-        }
-
-        body.setLinearVelocity(velX * speed,body.getLinearVelocity().y+velY*speed);
+        input.groundInputChecker(this);
+        input.climbInputChecker(this);
+        input.airborneInputChecker(this);
+        input.jumpAlgorithm(this);
     }
 
     private void maxSpeed(){
@@ -147,5 +90,21 @@ public class Player extends GameEntity{
         if (body.getPosition().y < -8){
              body.setTransform(1,5,0);
         }
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    public int getJumpCounter() {
+        return jumpCounter;
+    }
+
+    public void setJumpCounter(int jumpCounter) {
+        this.jumpCounter = jumpCounter;
     }
 }

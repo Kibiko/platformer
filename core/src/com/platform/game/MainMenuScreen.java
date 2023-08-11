@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import static helper.Constants.*;
+import static components.Constants.*;
 
 
 public class MainMenuScreen implements Screen {
