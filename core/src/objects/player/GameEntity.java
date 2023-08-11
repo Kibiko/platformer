@@ -7,6 +7,7 @@ public abstract class GameEntity {
 
     protected float x, y, velX, velY, speed;
     protected float width, height;
+    protected int health;
     protected Body body;
     protected boolean direction;
     protected boolean airborne;
@@ -77,6 +78,14 @@ public abstract class GameEntity {
 
     public void setGrounded(boolean grounded) {
         isGrounded = grounded;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public boolean isClimbing() {

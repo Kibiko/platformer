@@ -105,6 +105,10 @@ public class GameScreen implements Screen{
         if(debug) {
             box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         }
+
+        if(player.getHealth() == 0){
+            game.setScreen(new GameOverScreen(game));
+        }
     }
 
     public World getWorld() {

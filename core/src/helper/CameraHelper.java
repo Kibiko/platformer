@@ -29,8 +29,6 @@ public class CameraHelper extends OrthographicCamera {
         float xPos;
         float yPos;
 
-        float lerp = 0.1f;
-
         xPos = Math.round(player.getBody().getPosition().x * PPM * 10)/10f;//more smooth camera movement
         yPos = Math.round(player.getBody().getPosition().y * PPM * 10)/10f;
         this.zoom = 0.5f;

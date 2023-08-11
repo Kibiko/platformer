@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.platform.game.GameScreen;
 import helper.InputHelper;
 
 import static components.Constants.PPM;
@@ -21,6 +22,7 @@ public class Player extends GameEntity{
         this.speed = 4f;
         this.jumpCounter = 0;
         this.jumpTime = 0;
+        this.health = 3;
     }
 
     public void update() {
@@ -88,8 +90,10 @@ public class Player extends GameEntity{
 
     private void checkPlayerOutBounds(){
         if (body.getPosition().y < -8){
-             body.setTransform(1,5,0);
+            body.setTransform(1,5,0);
+            health--;
         }
+        System.out.println(health);
     }
 
     public float getSpeed() {
