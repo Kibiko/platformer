@@ -64,7 +64,7 @@ public class InputHelper {
                 player.setDirection(false);
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                velY = -0.1f;
+                velY = -0.05f;
             }
             velX *= 0.97;
         }

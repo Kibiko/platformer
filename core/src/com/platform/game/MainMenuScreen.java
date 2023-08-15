@@ -20,7 +20,7 @@ public class MainMenuScreen implements Screen {
     private int viewPortWidth;
 
     public MainMenuScreen(final Platformer game){
-        this.game= game;
+        this.game = game;
 
         introMusic = Gdx.audio.newMusic(Gdx.files.internal("8bit_forest_intro.mp3"));
         introMusic.setVolume(masterVolume);

@@ -1,5 +1,6 @@
 package com.platform.game;
 
+import animations.HealthBar;
 import animations.PlayerAnimation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -36,8 +37,9 @@ public class GameScreen implements Screen{
 
     //animation test
     private PlayerAnimation playerAnimation;
+    private HealthBar healthBar;
 
-    private boolean debug = false;
+    private boolean debug = true;
 
     public GameScreen(final Platformer game){
         this.game = game;
@@ -53,7 +55,7 @@ public class GameScreen implements Screen{
         camera = new CameraHelper();
         camera.setToOrtho(false, screenResWidth,screenResHeight);
 
-        playerImage = new Texture("fumiko_run_right.png");
+//        playerImage = new Texture("fumiko_run_right.png");
 //        sprite = new Sprite(playerImage);
 //        sprite.setPosition(Gdx.graphics.getWidth() / 2f - sprite.getWidth() / 2f,
 //                Gdx.graphics.getHeight() / 2f);
@@ -62,7 +64,9 @@ public class GameScreen implements Screen{
         this.orthogonalTiledMapRenderer = tileMapHelper.setupMap(); //sets up title map
 
         playerAnimation = new PlayerAnimation();
+        healthBar = new HealthBar();
         playerAnimation.create();
+        healthBar.create();
         world.setContactListener(new B2dContactListener(player));
     }
 
@@ -97,6 +101,7 @@ public class GameScreen implements Screen{
                 player.getBody().getPosition().y*PPM - PPM/2,
                 camera,
                 player);
+        healthBar.renderBar(camera, player);
 
 //        game.batch.begin();
 //        //render objects

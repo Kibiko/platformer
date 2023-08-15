@@ -93,7 +93,6 @@ public class Player extends GameEntity{
             body.setTransform(1,5,0);
             health--;
         }
-        System.out.println(health);
     }
 
     public float getSpeed() {

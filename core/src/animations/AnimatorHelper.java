@@ -17,13 +17,30 @@ public abstract class AnimatorHelper implements ApplicationListener {
     private static final int FRAME_COLS = 3, FRAME_ROWS = 1;
 
     // Objects used
-    Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
-    Texture walkSheet;
+    Animation<TextureRegion> animation; // Must declare frame type (TextureRegion)
+    Texture sheet;
     SpriteBatch spriteBatch;
 
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
+    public void setUp(String path, int FRAME_COLS, int FRAME_ROWS, float duration){
+        sheet = new Texture(Gdx.files.internal(path));
+
+        TextureRegion[][] tmp = TextureRegion.split(sheet,
+                sheet.getWidth()/FRAME_COLS,
+                sheet.getHeight()/FRAME_ROWS);
+
+        TextureRegion[] frames = new TextureRegion[FRAME_COLS*FRAME_ROWS];
+        int index = 0;
+        for (int i = 0; i < FRAME_ROWS; i++) {
+            for (int j = 0; j < FRAME_COLS; j++) {
+                frames[index++] = tmp[i][j];
+            }
+        }
+
+        animation = new Animation<TextureRegion>(duration, frames);
+    }
     public void create() {
 
     }
@@ -55,4 +72,5 @@ public abstract class AnimatorHelper implements ApplicationListener {
     public void dispose() { // SpriteBatches and Textures must always be disposed
 
     }
+
 }
