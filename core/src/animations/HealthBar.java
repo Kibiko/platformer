@@ -57,7 +57,7 @@ public class HealthBar extends AnimatorHelper {
 
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
         spriteBatch.begin();
-        spriteBatch.draw(currentFrame, -screenResWidth/4 + 13, +screenResHeight/4 - 45); // Draw current frame at (50, 50)
+        spriteBatch.draw(currentFrame, -screenResWidth/4 + 13, +screenResHeight/4 - 29, 48,16); // Draw current frame at (50, 50)
         spriteBatch.end();
     }
 
