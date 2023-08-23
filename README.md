@@ -51,4 +51,6 @@ And player related,
 ## Current works
 
 - Design of enemies and power
+- Bigger maps
+- Sounds and animations
 
