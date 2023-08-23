@@ -14,12 +14,6 @@ tasks.register('run', JavaExec) {
     standardInput = System.in
     workingDir = project.assetsDir
     ignoreExitValue = true
-    applicationDefaultJvmArgs = "-XstartOnFirstThread"
-
-    if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
-        // Required to run on macOS
-        jvmArgs += "-XstartOnFirstThread"
-    }
 }
 
 tasks.register('debug', JavaExec) {

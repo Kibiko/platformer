@@ -39,7 +39,7 @@ public class GameScreen implements Screen{
     private PlayerAnimation playerAnimation;
     private HealthBar healthBar;
 
-    private boolean debug = true;
+    private boolean debug = false;
 
     public GameScreen(final Platformer game){
         this.game = game;
@@ -84,6 +84,7 @@ public class GameScreen implements Screen{
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
+            dispose();
         }
     }
 
