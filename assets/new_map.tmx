@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="94">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="94">
  <tileset firstgid="1" source="generic_platformer_tiles.tsx"/>
  <objectgroup id="3" name="objects">
   <object id="5" name="platform" x="32" y="160">
-   <polygon points="0,0 64,0 64,11.2797 0,11.2797"/>
+   <polygon points="0,0 64,0 64,32.2797 0,32.2797"/>
   </object>
   <object id="6" name="platform" x="160" y="224">
-   <polygon points="0,0 64,0 64,11.8891 0,11.8891"/>
+   <polygon points="0,0 64,0 64,31.8891 0,31.8891"/>
   </object>
   <object id="11" name="ground" x="416" y="64">
    <polygon points="0,0 64,0 64,30.9024 0,30.9024"/>
@@ -26,7 +26,7 @@
   <object id="40" name="ground" x="320" y="352">
    <polygon points="0,0 128,0 128,47.2186 0,47.2186 0,0"/>
   </object>
-  <object id="42" name="player" x="75.2334" y="352.004" width="13.1131" height="29.654"/>
+  <object id="42" name="player" x="74.2334" y="323.792" width="13.1131" height="26.1995"/>
   <object id="43" name="water" x="512.351" y="435.763">
    <polygon points="0,0 0,206.953 -447.813,206.953 -447.813,0"/>
   </object>
