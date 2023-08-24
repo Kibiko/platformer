@@ -113,6 +113,7 @@ public class GameScreen implements Screen{
 
         if(player.getHealth() == 0){
             game.setScreen(new GameOverScreen(game));
+            dispose();
         }
     }
 
@@ -146,5 +147,7 @@ public class GameScreen implements Screen{
 
     @Override
     public void dispose() {
+        backMusic.dispose();
+        world.dispose();
     }
 }
