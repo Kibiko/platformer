@@ -150,5 +150,6 @@ public class GameScreen implements Screen{
     public void dispose() {
         backMusic.dispose();
         world.dispose();
+        orthogonalTiledMapRenderer.dispose();
     }
 }
