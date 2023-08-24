@@ -151,5 +151,7 @@ public class GameScreen implements Screen{
         backMusic.dispose();
         world.dispose();
         orthogonalTiledMapRenderer.dispose();
+        playerAnimation.dispose();
+        game.batch.dispose();
     }
 }

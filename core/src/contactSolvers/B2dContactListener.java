@@ -38,11 +38,19 @@ public class B2dContactListener implements ContactListener {
         if(fa.getBody().getUserData() == "LADDER"){
             player.setContactWithLadder(false);
             player.setClimbing(false);
-            player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x,player.getBody().getLinearVelocity().y/2f);
+            if(contactListenerHelper.minPlayerHeight(fb) > contactListenerHelper.maxPlatform(fa)){ //prevents player from shooting up from ladder at the top
+                player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x,player.getBody().getLinearVelocity().y/2f);
+            } else {
+                player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, player.getBody().getLinearVelocity().y);
+            }
         }else if(fb.getBody().getUserData() == "LADDER"){
             player.setContactWithLadder(false);
             player.setClimbing(false);
-            player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x,player.getBody().getLinearVelocity().y/2f);
+            if(contactListenerHelper.minPlayerHeight(fa) > contactListenerHelper.maxPlatform(fb)){
+                player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x,player.getBody().getLinearVelocity().y/2f);
+            } else {
+                player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, player.getBody().getLinearVelocity().y);
+            }
 
         }
     }

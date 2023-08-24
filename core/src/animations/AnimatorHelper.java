@@ -70,7 +70,7 @@ public abstract class AnimatorHelper implements ApplicationListener {
 
     @Override
     public void dispose() { // SpriteBatches and Textures must always be disposed
-
+        sheet.dispose();
     }
 
 }
