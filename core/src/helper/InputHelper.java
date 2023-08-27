@@ -89,7 +89,6 @@ public class InputHelper {
 
         //Variable jump ?
 
-
 //        if((Gdx.input.isKeyPressed(Input.Keys.SPACE) && (jumpTime>=0 || !airborne) && jumpCounter<2)){
 //            if (jumpTime == 0) {
 //                jumpTime = 20;

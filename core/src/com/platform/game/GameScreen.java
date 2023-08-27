@@ -39,7 +39,7 @@ public class GameScreen implements Screen{
     private PlayerAnimation playerAnimation;
     private HealthBar healthBar;
 
-    private boolean debug = false;
+    private boolean debug = true;
 
     public GameScreen(final Platformer game){
         this.game = game;

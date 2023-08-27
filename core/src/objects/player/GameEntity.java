@@ -10,12 +10,6 @@ public abstract class GameEntity {
     protected int health;
     protected Body body;
     protected boolean direction;
-    protected boolean airborne;
-    protected boolean swimming;
-    protected boolean inWater;
-    protected boolean isGrounded;
-    protected boolean isContactWithLadder;
-    protected boolean isClimbing;
 
     public GameEntity(float width, float height, Body body){
         this.x = body.getPosition().x;
@@ -27,9 +21,6 @@ public abstract class GameEntity {
         this.speed = 0;
         this.body = body;
         this.direction = true;
-        this.airborne = false;
-        this.swimming = false;
-        this.isClimbing = false;
     }
 
     public abstract void update();
@@ -48,38 +39,6 @@ public abstract class GameEntity {
         return direction;
     }
 
-    public boolean isAirborne() {
-        return airborne;
-    }
-
-    public void setAirborne(boolean airborne) {
-        this.airborne = airborne;
-    }
-
-    public boolean isSwimming() {
-        return swimming;
-    }
-
-    public void setSwimming(boolean swimming) {
-        this.swimming = swimming;
-    }
-
-    public boolean isInWater() {
-        return inWater;
-    }
-
-    public void setInWater(boolean inWater) {
-        this.inWater = inWater;
-    }
-
-    public boolean isGrounded() {
-        return isGrounded;
-    }
-
-    public void setGrounded(boolean grounded) {
-        isGrounded = grounded;
-    }
-
     public int getHealth() {
         return health;
     }
@@ -88,19 +47,67 @@ public abstract class GameEntity {
         this.health = health;
     }
 
-    public boolean isClimbing() {
-        return isClimbing;
+    public float getX() {
+        return x;
     }
 
-    public void setClimbing(boolean climbing) {
-        isClimbing = climbing;
+    public void setX(float x) {
+        this.x = x;
     }
 
-    public boolean isContactWithLadder() {
-        return isContactWithLadder;
+    public float getY() {
+        return y;
     }
 
-    public void setContactWithLadder(boolean contactWithLadder) {
-        isContactWithLadder = contactWithLadder;
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public float getVelX() {
+        return velX;
+    }
+
+    public void setVelX(float velX) {
+        this.velX = velX;
+    }
+
+    public float getVelY() {
+        return velY;
+    }
+
+    public void setVelY(float velY) {
+        this.velY = velY;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
+
+    public boolean isDirection() {
+        return direction;
     }
 }

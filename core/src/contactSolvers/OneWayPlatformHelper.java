@@ -1,17 +1,14 @@
 package contactSolvers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Transform;
-import objects.player.Player;
 
-public class ContactListenerHelper {
+public class OneWayPlatformHelper{
 
-    public ContactListenerHelper(){
+    public OneWayPlatformHelper(){
 
     }
 
@@ -58,45 +55,11 @@ public class ContactListenerHelper {
         }
     }
 
-    public void upPlatformDisable(Contact contact, Fixture mainFixture, Fixture otherFixture){
-        if(mainFixture.getBody().getUserData() == "PLATFORM" &&
+    public void upPlatformDisable(Contact contact, Fixture mainFixture, Fixture otherFixture) {
+        if (mainFixture.getBody().getUserData() == "PLATFORM" &&
                 otherFixture.getBody().getUserData() == "PLAYER" &&
-                minPlayerHeight(otherFixture) <= maxPlatform(mainFixture)){
+                minPlayerHeight(otherFixture) <= maxPlatform(mainFixture)) {
             contact.setEnabled(false);
-        }
-
-    }
-
-    public void groundedCheck(Player player, Fixture fixture, Fixture otherFixture){
-        if(fixture.getBody().getUserData() =="PLATFORM" && otherFixture.getBody().getUserData() == "PLAYER" && otherFixture.getBody().getLinearVelocity().y <= 0){
-            player.setGrounded(true);
-        } else{
-            player.setGrounded(false);
-        }
-    }
-
-    public void shootUp(Fixture otherFixture){
-        System.out.println("Adding Force");
-        otherFixture.getBody().applyLinearImpulse(new Vector2(0,
-                        10-otherFixture.getBody().getLinearVelocity().y),
-                otherFixture.getBody().getPosition(), true);
-    }
-
-    public void checkSwimming(Player player, Fixture mainFixture, Fixture otherFixture) {
-        if (mainFixture.getBody().getUserData() == "WATER") {
-            player.setSwimming(true);
-//            System.out.println("Player is swimming");
-        } else if (otherFixture.getBody().getUserData() == "WATER") {
-            player.setSwimming(true);
-//            System.out.println("Player is swimming");
-        }
-    }
-
-    public void checkClimbing(Player player, Fixture mainFixture, Fixture otherFixture) {
-        if (mainFixture.getBody().getUserData() == "LADDER") {
-            player.setContactWithLadder(true);
-        } else if (otherFixture.getBody().getUserData() == "LADDER"){
-            player.setContactWithLadder(true);
         }
     }
 }

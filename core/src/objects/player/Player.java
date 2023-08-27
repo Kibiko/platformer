@@ -12,16 +12,18 @@ import static components.Constants.PPM;
 
 public class Player extends GameEntity{
 
+    protected boolean airborne;
+    protected boolean grounded;
+    protected boolean climbing;
+    protected boolean swimming;
+    protected boolean contactWithLadder;
     private int jumpCounter;
-    private int jumpTime;
-    private float speed;
     private InputHelper input = new InputHelper();
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
         this.speed = 4f;
         this.jumpCounter = 0;
-        this.jumpTime = 0;
         this.health = 3;
     }
 
@@ -44,9 +46,9 @@ public class Player extends GameEntity{
 
     private void checkPlayerAirborne(){
         if(body.getLinearVelocity().y !=0){
-            airborne = true;
+            this.airborne = true;
         } else{
-            airborne = false;
+            this.airborne = false;
         }
     }
 
@@ -65,12 +67,12 @@ public class Player extends GameEntity{
     }
 
     private void checkPlayerClimbing(){
-        if(isContactWithLadder && (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.S))) {
-            isClimbing = true;
+        if(contactWithLadder && (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.S))) {
+            this.climbing = true;
             body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 0.25f));
             jumpCounter = 0;
         }
-        if(isClimbing){
+        if(climbing){
             body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 0.25f));
         }
     }
@@ -109,5 +111,45 @@ public class Player extends GameEntity{
 
     public void setJumpCounter(int jumpCounter) {
         this.jumpCounter = jumpCounter;
+    }
+
+    public boolean isAirborne() {
+        return this.airborne;
+    }
+
+    public void setAirborne(boolean airborne) {
+        this.airborne = airborne;
+    }
+
+    public boolean isGrounded() {
+        return this.grounded;
+    }
+
+    public void setGrounded(boolean grounded) {
+        this.grounded = grounded;
+    }
+
+    public boolean isClimbing() {
+        return this.climbing;
+    }
+
+    public void setClimbing(boolean climbing) {
+        this.climbing = climbing;
+    }
+
+    public boolean isSwimming() {
+        return this.swimming;
+    }
+
+    public void setSwimming(boolean swimming) {
+        this.swimming = swimming;
+    }
+
+    public boolean isContactWithLadder() {
+        return this.contactWithLadder;
+    }
+
+    public void setContactWithLadder(boolean contactWithLadder) {
+        this.contactWithLadder = contactWithLadder;
     }
 }

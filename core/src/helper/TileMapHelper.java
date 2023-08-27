@@ -33,12 +33,11 @@ public class TileMapHelper {
 
     private void parseMapObjects(MapObjects mapObjects){ //for map objects we create a static body
         for (MapObject mapObject : mapObjects){
-//            System.out.println(mapObject);;
             if(mapObject instanceof PolygonMapObject){
                 String polygonName = mapObject.getName();
                 if(polygonName.equals("water")){
                     createWaterBody((PolygonMapObject) mapObject);
-                } else if (polygonName.equals("platform") || polygonName.equals("slope")){
+                } else if (polygonName.equals("platform")){
                     createPlatformBody((PolygonMapObject) mapObject);
                 } else if (polygonName.equals("ladder")) {
                     createLadderBody((PolygonMapObject) mapObject);
@@ -70,7 +69,7 @@ public class TileMapHelper {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         Body body = gameScreen.getWorld().createBody(bodyDef);
         Shape shape = createPolygonShape(polygonMapObject);
-        body.createFixture(shape, 1000);
+        body.createFixture(shape, 0);
         shape.dispose();
     }
 
@@ -79,7 +78,7 @@ public class TileMapHelper {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         Body body = gameScreen.getWorld().createBody(bodyDef);
         Shape shape = createPolygonShape(polygonMapObject);
-        body.createFixture(shape, 1000);
+        body.createFixture(shape, 0);
         body.setUserData("PLATFORM");
         shape.dispose();
     }

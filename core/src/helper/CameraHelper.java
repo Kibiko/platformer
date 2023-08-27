@@ -15,6 +15,7 @@ public class CameraHelper extends OrthographicCamera {
         private MapProperties mapProperties;
 
     public void cameraUpdate(Player player){ //updates camera if we wish to
+
         tiledMap = new TmxMapLoader().load("new_map.tmx");
         mapProperties = tiledMap.getProperties();
         int mapWidth = mapProperties.get("width", Integer.class);
@@ -53,6 +54,7 @@ public class CameraHelper extends OrthographicCamera {
         }
         this.position.set(position);
         this.update();
+        tiledMap.dispose();
     }
 
     public TiledMap getTiledMap() {
