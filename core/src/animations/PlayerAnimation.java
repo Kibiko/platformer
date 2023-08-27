@@ -55,22 +55,6 @@ public class PlayerAnimation extends AnimatorHelper {
         boolean loop = true;
         float frameDuration = 0.12f;
 
-        //swimming
-//        if(player.isInWater()) {
-//            if (player.getDirection() && player.getBody().getLinearVelocity().x == 0) {
-//
-//            } else if (!player.getDirection() && player.getBody().getLinearVelocity().x == 0) {
-//
-//            } else if (player.getDirection() && player.getBody().getLinearVelocity().x > 0) {
-//
-//            } else if (!player.getDirection() && player.getBody().getLinearVelocity().x < 0) {
-//
-//            } else if (player.getDirection() && player.getBody().getLinearVelocity().y < 0) {
-//
-//            } else if (!player.getDirection() && player.getBody().getLinearVelocity().y < 0) {
-//
-//            }
-//        }
 
         //jumping
         if(player.isAirborne()) {
@@ -122,6 +106,7 @@ public class PlayerAnimation extends AnimatorHelper {
         spriteBatch.begin();
         spriteBatch.draw(currentFrame, xPos, yPos); // Draw current frame at (50, 50)
         spriteBatch.end();
+        walkSheet.dispose();
     }
 
     public void dispose(){

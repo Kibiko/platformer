@@ -6,10 +6,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import objects.player.Player;
 import org.w3c.dom.Text;
+
+import static components.Constants.screenResHeight;
+import static components.Constants.screenResWidth;
 
 public abstract class AnimatorHelper implements ApplicationListener {
 
@@ -24,7 +28,7 @@ public abstract class AnimatorHelper implements ApplicationListener {
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
-    public void setUp(String path, int FRAME_COLS, int FRAME_ROWS, float duration){
+    public void setUp(String path, int FRAME_COLS, int FRAME_ROWS, float duration, OrthographicCamera camera, SpriteBatch spriteBatch){
         sheet = new Texture(Gdx.files.internal(path));
 
         TextureRegion[][] tmp = TextureRegion.split(sheet,
@@ -40,6 +44,16 @@ public abstract class AnimatorHelper implements ApplicationListener {
         }
 
         animation = new Animation<TextureRegion>(duration, frames);
+
+        spriteBatch.setProjectionMatrix(camera.projection);
+
+        stateTime += Gdx.graphics.getDeltaTime();
+
+        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
+        spriteBatch.begin();
+        spriteBatch.draw(currentFrame, -screenResWidth/4 + 13, +screenResHeight/4 - 29, 48,16); // Draw current frame at (50, 50)
+        spriteBatch.end();
+        sheet.dispose();
     }
     public void create() {
 

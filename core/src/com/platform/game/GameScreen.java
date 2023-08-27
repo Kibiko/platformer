@@ -55,10 +55,6 @@ public class GameScreen implements Screen{
         camera = new CameraHelper();
         camera.setToOrtho(false, screenResWidth,screenResHeight);
 
-//        playerImage = new Texture("fumiko_run_right.png");
-//        sprite = new Sprite(playerImage);
-//        sprite.setPosition(Gdx.graphics.getWidth() / 2f - sprite.getWidth() / 2f,
-//                Gdx.graphics.getHeight() / 2f);
 
         this.tileMapHelper = new TileMapHelper(this); //tiledmap class
         this.orthogonalTiledMapRenderer = tileMapHelper.setupMap(); //sets up title map
@@ -78,7 +74,7 @@ public class GameScreen implements Screen{
     public void update(){ //used to update the world
         world.step(1/60f, 6, 2);
         camera.cameraUpdate(player);
-        game.batch.setProjectionMatrix(camera.combined); //sets camera each time
+//        game.batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
         player.update();
 
@@ -96,7 +92,6 @@ public class GameScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         orthogonalTiledMapRenderer.render(); //renders the map
-//        sprite.setPosition(player.getBody().getPosition().x*PPM - PPM/2,player.getBody().getPosition().y*PPM - PPM/2);
 
         playerAnimation.render(player.getBody().getPosition().x*PPM - PPM/2,
                 player.getBody().getPosition().y*PPM - PPM/2,
@@ -104,10 +99,6 @@ public class GameScreen implements Screen{
                 player);
         healthBar.renderBar(camera, player);
 
-//        game.batch.begin();
-//        //render objects
-//        game.batch.draw(sprite,sprite.getX(),sprite.getY());
-//        game.batch.end();
         if(debug) {
             box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         }

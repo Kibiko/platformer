@@ -45,20 +45,12 @@ public class HealthBar extends AnimatorHelper {
 
     public void renderBar(OrthographicCamera camera, Player player) {
         if (player.getHealth() == 3) {
-            setUp("health_3.png", 1, 1, 0.5f);
+            setUp("health_3.png", 1, 1, 0.5f, camera, spriteBatch);
         } else if(player.getHealth() == 2){
-            setUp("health_2.png", 1, 1, 0.5f);
+            setUp("health_2.png", 1, 1, 0.5f, camera, spriteBatch);
         } else if(player.getHealth() == 1){
-            setUp("health_1.png", 1, 1, 0.5f);
+            setUp("health_1.png", 1, 1, 0.5f, camera, spriteBatch);
         }
-        spriteBatch.setProjectionMatrix(camera.projection);
-
-        stateTime += Gdx.graphics.getDeltaTime();
-
-        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        spriteBatch.begin();
-        spriteBatch.draw(currentFrame, -screenResWidth/4 + 13, +screenResHeight/4 - 29, 48,16); // Draw current frame at (50, 50)
-        spriteBatch.end();
     }
 
     @Override

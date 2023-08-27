@@ -54,7 +54,7 @@ public class CameraHelper extends OrthographicCamera {
         }
         this.position.set(position);
         this.update();
-        tiledMap.dispose();
+        tiledMap.dispose(); //IMPORTANT
     }
 
     public TiledMap getTiledMap() {
