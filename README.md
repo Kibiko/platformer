@@ -3,8 +3,9 @@
 ## Contents
 
 1. [Introduction](#introduction)
-2. [State of Game](#state-of-game)
-3. [Current Works](#current-works)
+2. [UML](#uml)
+3. [State of Game](#state-of-game)
+4. [Current Works](#current-works)
 
 ## Introduction
 
@@ -23,6 +24,10 @@ I first started off watching [Small Pixel Games](https://www.youtube.com/@smallp
 Currently I am still developing this game and figuring out how I want it to be designed.
 
 Collaborators are more than welcome!!
+
+## UML
+
+![uml](platformer_UML.png)
 
 ## State of Game
 
