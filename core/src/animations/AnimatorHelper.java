@@ -21,9 +21,9 @@ public abstract class AnimatorHelper implements ApplicationListener {
     private static final int FRAME_COLS = 3, FRAME_ROWS = 1;
 
     // Objects used
-    Animation<TextureRegion> animation; // Must declare frame type (TextureRegion)
-    Texture sheet;
-    SpriteBatch spriteBatch;
+    protected Animation<TextureRegion> animation; // Must declare frame type (TextureRegion)
+    protected Texture sheet;
+    protected SpriteBatch spriteBatch;
 
     // A variable for tracking elapsed time for the animation
     float stateTime;

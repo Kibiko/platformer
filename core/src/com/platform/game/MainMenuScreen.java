@@ -16,8 +16,7 @@ public class MainMenuScreen implements Screen {
     private final Platformer game;
     private OrthographicCamera camera;
     private Music introMusic;
-    private int viewPortHeight;
-    private int viewPortWidth;
+
 
     public MainMenuScreen(final Platformer game){
         this.game = game;

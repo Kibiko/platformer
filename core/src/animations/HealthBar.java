@@ -16,12 +16,9 @@ public class HealthBar extends AnimatorHelper {
 
     private static final int FRAME_COLS = 1, FRAME_ROWS = 1;
 
-    Animation<TextureRegion> healthBar; // Must declare frame type (TextureRegion)
-    Texture healthBarSheet;
-    SpriteBatch spriteBatch;
-
+    protected Animation<TextureRegion> healthBar; // Must declare frame type (TextureRegion)
+    protected Texture healthBarSheet;
     float stateTime;
-
     @Override
     public void create() {
         healthBarSheet = new Texture(Gdx.files.internal("health_3.png"));

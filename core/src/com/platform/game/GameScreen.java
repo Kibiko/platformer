@@ -32,8 +32,6 @@ public class GameScreen implements Screen{
 
     //game objects
     private Player player;
-    private Sprite sprite;
-    private Texture playerImage;
 
     //animation test
     private PlayerAnimation playerAnimation;
@@ -74,7 +72,7 @@ public class GameScreen implements Screen{
     public void update(){ //used to update the world
         world.step(1/60f, 6, 2);
         camera.cameraUpdate(player);
-//        game.batch.setProjectionMatrix(camera.combined);
+        game.batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
         player.update();
 
@@ -87,6 +85,11 @@ public class GameScreen implements Screen{
     @Override
     public void render(float delta) {
         this.update();
+
+        if(player.getHealth() == 0){
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
 
         Gdx.gl.glClearColor(0.1f,0.1f,0.1f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -103,10 +106,6 @@ public class GameScreen implements Screen{
             box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         }
 
-        if(player.getHealth() == 0){
-            game.setScreen(new GameOverScreen(game));
-            dispose();
-        }
     }
 
     public World getWorld() {
@@ -140,9 +139,10 @@ public class GameScreen implements Screen{
     @Override
     public void dispose() {
         backMusic.dispose();
-        world.dispose();
+//        world.dispose();
         orthogonalTiledMapRenderer.dispose();
         playerAnimation.dispose();
-        game.batch.dispose();
+        healthBar.dispose();
+//        game.batch.dispose();
     }
 }

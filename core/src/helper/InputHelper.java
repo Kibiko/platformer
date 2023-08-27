@@ -7,8 +7,8 @@ import objects.player.Player;
 
 public class InputHelper {
 
-    float velX = 0;
-    float velY = 0;
+    private float velX = 0;
+    private float velY = 0;
 
     public InputHelper(){
 

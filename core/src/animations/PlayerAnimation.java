@@ -13,12 +13,11 @@ public class PlayerAnimation extends AnimatorHelper {
     private static final int FRAME_COLS = 3, FRAME_ROWS = 1;
 
     // Objects used
-    Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
-    Texture walkSheet;
-    SpriteBatch spriteBatch;
+    protected Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
+    protected Texture walkSheet;
 
     // A variable for tracking elapsed time for the animation
-    float stateTime;
+    protected float stateTime;
 
     public void create(){
 

@@ -10,7 +10,6 @@ public class Platformer extends Game {
 
 	public static Platformer INSTANCE;
 	public SpriteBatch batch;
-	public Texture img;
 	public BitmapFont font;
 
 	public Platformer(){
