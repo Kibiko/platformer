@@ -8,10 +8,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import contactSolvers.B2dContactListener;
 import helper.CameraHelper;
 import helper.TileMapHelper;
@@ -41,6 +44,8 @@ public class GameScreen implements Screen{
 
     public GameScreen(final Platformer game){
         this.game = game;
+
+        this.game.batch = new SpriteBatch();
 
         backMusic = Gdx.audio.newMusic(Gdx.files.internal("8bit_game_music.wav"));
         backMusic.setVolume(masterVolume);
@@ -77,8 +82,8 @@ public class GameScreen implements Screen{
         player.update();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-            Gdx.app.exit();
             dispose();
+            Gdx.app.exit();
         }
     }
 
@@ -87,8 +92,8 @@ public class GameScreen implements Screen{
         this.update();
 
         if(player.getHealth() == 0){
+            dispose();
             game.setScreen(new GameOverScreen(game));
-//            dispose();
         }
 
         Gdx.gl.glClearColor(0.1f,0.1f,0.1f,1);
@@ -139,10 +144,15 @@ public class GameScreen implements Screen{
     @Override
     public void dispose() {
         backMusic.dispose();
-        world.dispose();
         orthogonalTiledMapRenderer.dispose();
         playerAnimation.dispose();
         healthBar.dispose();
-//        game.batch.dispose(); BATCH IS ALREADY DISPOSED WHEN GAME.BATCH.END is called 
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (Body body : bodies) {
+            world.destroyBody(body);
+        }
+        game.batch.dispose();
+        world.dispose();
     }
 }

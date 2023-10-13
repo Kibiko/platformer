@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import static components.Constants.*;
@@ -27,7 +28,7 @@ public class MainMenuScreen implements Screen {
 
         camera = new OrthographicCamera(); //orthographic camera is the same scale and not perspective
         camera.setToOrtho(false,screenResWidth,screenResHeight);
-        titleImage = new Texture(Gdx.files.internal("title.png"));
+        titleImage = new Texture(Gdx.files.internal("main_title.png"));
     }
 
     @Override
@@ -42,13 +43,13 @@ public class MainMenuScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined); //represents the combied view and projection matrix, instructs batch to use that combined matrix
 
         game.batch.begin();
-        game.batch.draw(titleImage,screenResWidth/2 - 400,350,800,200);
+        game.batch.draw(titleImage,screenResWidth/2 - 300,100,600,600);
         game.font.draw(game.batch, "Click Anywhere To Begin!",screenResWidth/2 - 100,200);
         game.batch.end();
 
         if(Gdx.input.isTouched()){
-            game.setScreen(new GameScreen(game)); //set new screen if it is touched
             dispose();
+            game.setScreen(new GameScreen(game)); //set new screen if it is touched
         }
     }
 
@@ -76,6 +77,6 @@ public class MainMenuScreen implements Screen {
     public void dispose() {
         introMusic.dispose();
         titleImage.dispose();
-//        game.batch.dispose();
+        game.batch.dispose();
     }
 }
