@@ -31,6 +31,5 @@ public class Platformer extends Game {
 	
 	@Override
 	public void dispose () {
-		batch.dispose(); //disposes of the batch
 	}
 }

@@ -76,6 +76,6 @@ public class MainMenuScreen implements Screen {
     public void dispose() {
         introMusic.dispose();
         titleImage.dispose();
-        game.batch.dispose();
+//        game.batch.dispose();
     }
 }

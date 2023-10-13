@@ -88,7 +88,7 @@ public class GameScreen implements Screen{
 
         if(player.getHealth() == 0){
             game.setScreen(new GameOverScreen(game));
-            dispose();
+//            dispose();
         }
 
         Gdx.gl.glClearColor(0.1f,0.1f,0.1f,1);
@@ -139,10 +139,10 @@ public class GameScreen implements Screen{
     @Override
     public void dispose() {
         backMusic.dispose();
-//        world.dispose();
+        world.dispose();
         orthogonalTiledMapRenderer.dispose();
         playerAnimation.dispose();
         healthBar.dispose();
-//        game.batch.dispose();
+//        game.batch.dispose(); BATCH IS ALREADY DISPOSED WHEN GAME.BATCH.END is called 
     }
 }
