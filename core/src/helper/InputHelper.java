@@ -76,16 +76,17 @@ public class InputHelper {
         player.getBody().setLinearVelocity(velX * player.getSpeed(),player.getBody().getLinearVelocity().y+velY*player.getSpeed());
     }
 
-    public void jumpAlgorithm(Player player){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpCounter() <2 && !player.isClimbing()){ //release it to go for second jump, just pressed
-            if(player.isAirborne()){
+    public void jumpAlgorithm(Player player) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.getJumpCounter() < 2 && !player.isClimbing()) { //release it to go for second jump, just pressed
+            if (player.isAirborne()) {
                 player.setJumpCounter(player.getJumpCounter() + 1);
             }
             float force = player.getBody().getMass() * 7;
-            player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x,0.1f); //allows double jump and doesn't clash with body hitting floor
-            player.getBody().applyLinearImpulse(new Vector2(0,force), player.getBody().getPosition(), true); //apply force to y direction in vector2
+            player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, 0.1f); //allows double jump and doesn't clash with body hitting floor
+            player.getBody().applyLinearImpulse(new Vector2(0, force), player.getBody().getPosition(), true); //apply force to y direction in vector2
             player.setJumpCounter(player.getJumpCounter() + 1);
         }
+    }
 
         //Variable jump ?
 
@@ -108,5 +109,5 @@ public class InputHelper {
 //                this.jumpTime = 0;
 //            }
 //        }
-    }
+
 }
